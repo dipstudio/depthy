@@ -9,7 +9,7 @@ angular.module('depthyApp').provider('depthy', function depthy() {
     depthScale: Modernizr.mobile ? 2 : 1,
   });
 
-  this.$get = function(ga, $timeout, $rootScope, $document, $window, $q, $modal, $state, StateModal, UpdateCheck) {
+  this.$get = function($timeout, $rootScope, $document, $window, $q, $modal, $state, StateModal, UpdateCheck) {
 
     var leftpaneDeferred, depthy,
       history = [];
@@ -411,7 +411,6 @@ angular.module('depthyApp').provider('depthy', function depthy() {
       }, function(n, o) {
         if (n === o) return;
         viewer.qualityStart = depthy.getViewer().getQuality();
-        ga('set', 'dimension2', viewer.qualityStart);
         storeSettings();
       }, true);
     }

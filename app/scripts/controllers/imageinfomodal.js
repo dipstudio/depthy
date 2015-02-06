@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('depthyApp')
-.controller('ImageInfoModalCtrl', function ($scope, $modalInstance, ga, depthy, $timeout, StateModal) {
+.controller('ImageInfoModalCtrl', function ($scope, $modalInstance, depthy, $timeout, StateModal) {
   $scope.info = {};
   $scope.loading = 2;
 
@@ -36,12 +36,10 @@ angular.module('depthyApp')
       depthy.loadLocalDepthmap(files[0]).then(
         function(fromLensblur) {
           $scope.isDepthmapProcessing = false;
-          ga('send', 'event', 'depthmap', 'parsed', fromLensblur ? 'from-lensblur' : 'from-file');
           $modalInstance.dismiss();
         },
         function(error) {
           $scope.isDepthmapProcessing = false;
-          ga('send', 'event', 'depthmap', 'error', error);
           StateModal.showAlert(error, {stateOptions: {location: 'replace'}});
         }
       );

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('depthyApp')
-.controller('ExportWebmModalCtrl', function ($scope, $modalInstance, $rootElement, depthy, ga, $timeout, $sce) {
+.controller('ExportWebmModalCtrl', function ($scope, $modalInstance, $rootElement, depthy, $timeout, $sce) {
   $scope.exportProgress = 0;
   $scope.imageReady = false;
   $scope.shareUrl = '';
@@ -15,13 +15,8 @@ angular.module('depthyApp')
         exportStarted = new Date(),
         gaLabel = 'size ' + depthy.exportSize + ' dur ' + depthy.viewer.animDuration;
 
-    ga('send', 'event', 'webm', 'start', gaLabel);
-
     exportPromise.then(
       function exportSuccess(blob) {
-        ga('send', 'timing', 'webm', 'created', new Date() - exportStarted, gaLabel);
-        ga('send', 'event', 'webm', 'created', gaLabel, blob.size);
-
         $scope.size = blob.size;
         $scope.videoUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob));
         $scope.ready = true;

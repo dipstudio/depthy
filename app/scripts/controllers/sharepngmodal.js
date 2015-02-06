@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('depthyApp')
-.controller('SharePngModalCtrl', function ($scope, $sce, $timeout, $modalInstance, $state, $q, ga, depthy) {
+.controller('SharePngModalCtrl', function ($scope, $sce, $timeout, $modalInstance, $state, $q, depthy) {
   var uploadPromise;
 
   $scope.image = depthy.opened;
@@ -9,7 +9,6 @@ angular.module('depthyApp')
 
 
   function upload(imageDataUri) {
-    ga('send', 'event', 'png', 'upload', '', imageDataUri.length);
     uploadPromise = $.ajax({
       url: 'https://api.imgur.com/3/image.json',
       method: 'POST',
@@ -41,7 +40,6 @@ angular.module('depthyApp')
           deleteHash = response.data.deletehash;
 
       if (response.data.type === 'image/png') {
-        ga('send', 'event', 'png', 'upload-success');
         $scope.shareImage = $scope.image.createShareImage({
           url: 'https://i.imgur.com/' + id,
           state: 'imgur',
@@ -70,8 +68,7 @@ angular.module('depthyApp')
         });
       } else {
         $scope.uploadError = 'This file is too big to upload it to imgur... Sorry :(';
-          
-        ga('send', 'event', 'png', 'upload-converted');
+
         $.ajax({
           url: 'https://api.imgur.com/3/image/' + deleteHash,
           method: 'DELETE',
@@ -89,7 +86,6 @@ angular.module('depthyApp')
       uploadPromise = null;
       $scope.uploadError = (response.data || {}).error || 'Something went wrong... Please try again.';
       console.error('Share failed with ', response);
-      ga('send', 'event', 'png', 'upload-error', status + ': ' + $scope.uploadError);
       $scope.$safeApply();
     });
 
@@ -105,7 +101,7 @@ angular.module('depthyApp')
         console.groupEnd();
         if (dataUrl.length > sizeLimit) {
           if (size > 500) {
-            generateAndUpload(size * ratio, ratio, sizeLimit);          
+            generateAndUpload(size * ratio, ratio, sizeLimit);
           } else {
             $scope.uploadError = 'This file is too big to upload it to imgur... Sorry :(';
           }

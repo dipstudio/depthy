@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('depthyApp')
-.controller('ExportGifModalCtrl', function ($scope, $modalInstance, $rootElement, depthy, ga, $timeout) {
+.controller('ExportGifModalCtrl', function ($scope, $modalInstance, $rootElement, depthy, $timeout) {
   $scope.exportProgress = -1;
   $scope.imageReady = false;
   $scope.shareUrl = '';
@@ -15,12 +15,8 @@ angular.module('depthyApp')
         exportStarted = new Date(),
         gaLabel = 'size ' + depthy.exportSize + ' dur ' + depthy.viewer.animDuration;
 
-    ga('send', 'event', 'gif', 'start', gaLabel);
-
     exportPromise.then(
       function exportSuccess(blob) {
-        ga('send', 'timing', 'gif', 'created', new Date() - exportStarted, gaLabel);
-        ga('send', 'event', 'gif', 'created', gaLabel, blob.size);
         $scope.imageSize = blob.size;
         $scope.imageOverLimit = blob.size > 2097152;
 
@@ -56,7 +52,6 @@ angular.module('depthyApp')
     );
 
     $scope.share = function() {
-      ga('send', 'event', 'gif', 'upload', gaLabel, $scope.imageSize);
       $scope.shareUrl = 'sharing';
       $scope.shareError = null;
       $scope.shareProgress = 0;
@@ -89,7 +84,6 @@ angular.module('depthyApp')
         console.log(response, status, xhr);
         var id = response.data.id;
 
-        ga('send', 'event', 'gif', 'upload-success');
         $scope.shareUrl = 'https://imgur.com/' + id;
         $scope.share = {
           url: $scope.shareUrl,
@@ -105,7 +99,6 @@ angular.module('depthyApp')
         $scope.shareUrl = '';
         $scope.shareError = (response.data || {}).error || 'Something went wrong... Please try again.';
         console.error('Share failed with ', response);
-        ga('send', 'event', 'gif', 'upload-error', status + ': ' + $scope.shareError);
         $scope.$safeApply();
       });
 

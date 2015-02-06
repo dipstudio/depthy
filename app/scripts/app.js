@@ -3,7 +3,6 @@
 angular.module('depthyApp', [
   'ngAnimate',
   'ngTouch',
-  'ga',
   'shareUrls',
   // 'visibleClass',
   // 'mgcrea.ngStrap.modal',
@@ -185,7 +184,7 @@ angular.module('depthyApp', [
   })
   ;
 })
-.run(function($rootScope, ga, $location, $state) {
+.run(function($rootScope, $location, $state) {
   // check first state
   var stateChangeStart = $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
     stateChangeStart();
@@ -195,9 +194,5 @@ angular.module('depthyApp', [
       event.preventDefault();
       $state.go('index');
     }
-  });
-  $rootScope.$on('$stateChangeSuccess', function() {
-    ga('set', 'page', $location.url());
-    ga('send', 'pageview');
   });
 });

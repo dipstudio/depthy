@@ -8,16 +8,16 @@
     'depthy-ready': depthy.isReady(),
     'depthy-loading': depthy.isLoading()}"
 >
-  <div id="hamburger" class="icon icon-navicon-bold" ng-click="depthy.leftpaneToggle()"></div>
-  <nav id="navbar" class="text-right">
+  <!--<div id="hamburger" class="icon icon-navicon-bold" ng-click="depthy.leftpaneToggle()"></div>-->
+  <!--<nav id="navbar" class="text-right">-->
     <!-- <logo class="white" ng-click="depthy.leftpaneOpen()"></logo> -->
     <!-- <button class="btn btn-ctrl btn-success" ng-click="selectFile($event)" title="Open"><i class="icon" ng-class="depthy.isLoading() ? 'icon-loading' : 'icon-open'"></i></button> -->
-    <div class="btn-group">
+    <!--<div class="btn-group">
       <button class="btn btn-default btn-control" ng-click="screenfull.toggle()" ng-if="screenfull.enabled && !screenfull.isFullscreen" title="Fullscreen" ga><i class="icon icon-expand"></i></button>
     </div>
-  </nav>
+  </nav>-->
 
-  <div id="leftpane" ng-swipe-left="depthy.leftpaneClose()">
+  <!--<div id="leftpane" ng-swipe-left="depthy.leftpaneClose()">
     <div class="scroll">
 
       <section id="about">
@@ -77,7 +77,7 @@
 
 
     </div>
-  </div>
+  </div>-->
 
 
   <section id="viewer">
@@ -95,7 +95,7 @@
 
     </div>
 
-    <div class="depthy-viewer" depthy-viewer="depthy.viewer" depthy-file-url="http://localhost:9000/samples/flowers-image.jpg" depthy-depth-url="http://localhost:9000/samples/flowers-depth.jpg" ng-click="depthy.zenModeToggle()" ng-swipe-right="depthy.leftpaneOpen()">
+    <div class="depthy-viewer" depthy-viewer="depthy.viewer" depthy-file-url="http://localhost:9000/samples/flowers-image.jpg" depthy-depth-url="http://localhost:9000/samples/flowers-depth.jpg">
       <canvas></canvas>
       <div class="icon icon-loading"></div>
     </div>

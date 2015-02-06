@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('depthyApp')
-.controller('MainCtrl', function ($rootScope, $window, $scope, $timeout, ga, depthy, $element, $modal, $state, StateModal) {
+.controller('MainCtrl', function ($rootScope, $window, $scope, $timeout, depthy, $element, $modal, $state, StateModal) {
 
   $rootScope.depthy = depthy;
   $rootScope.viewer = depthy.viewer; // shortcut
@@ -12,8 +12,6 @@ angular.module('depthyApp')
     //console.info(depthy.viewer);
 
   $scope.version = depthy.getVersion();
-
-  ga('set', 'dimension1', (Modernizr.webgl ? 'webgl' : 'no-webgl') + ' ' + (Modernizr.webp ? 'webp' : 'no-webp'));
 
   $rootScope.$safeApply = function(fn) {
     var phase = this.$root.$$phase;
@@ -43,12 +41,10 @@ angular.module('depthyApp')
     if (files && files.length) {
       depthy.loadLocalImage(files[0]).then(
         function() {
-          ga('send', 'event', 'image', 'parsed', depthy.hasDepthmap() ? 'depthmap' : 'no-depthmap');
           depthy.leftpaneClose();
           depthy.opened.openState();
         },
         function(e) {
-          ga('send', 'event', 'image', 'error', e);
           depthy.leftpaneClose();
         }
       );
@@ -185,14 +181,13 @@ angular.module('depthyApp')
   $scope.$on('pixi.webgl.init.exception', function(evt, exception) {
     console.error('WebGL Init Exception', exception);
     Modernizr.webgl = false;
-    ga('send', 'event', 'webgl', 'exception', exception.toString(), {nonInteraction: 1});
   });
 
   $($window).on('resize', function() {
     var $viewer = $('#viewer');
     depthy.viewer.size = {
       width:  $viewer.width(),
-      height: $viewer.height(),
+      height: $viewer.height()
     };
     console.log('Resize %dx%d', $viewer.width(), $viewer.height());
     $scope.$safeApply();
@@ -202,26 +197,4 @@ angular.module('depthyApp')
   $($window).on('online offline', function() {
     $scope.$safeApply();
   });
-
-  /*$timeout(function() {
-    $scope.scroll = new IScroll('#leftpane', {
-      mouseWheel: true,
-      scrollbars: 'custom',
-      click: false,
-      fadeScrollbars: true,
-      interactiveScrollbars: true,
-      resizeScrollbars: false,
-      eventPassthrough: 'horizontal',
-    });
-    // refresh on every digest...
-    $scope.$watch(function() {
-      setTimeout(function() {
-        $scope.scroll.refresh();
-      }, 100);
-    });
-  });*/
-
-
-
-
 });

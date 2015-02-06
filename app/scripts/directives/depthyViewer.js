@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('depthyApp')
-.directive('depthyViewer', function () {
+.directive('depthyViewer', function (depthy) {
   return {
     restrict: 'A',
     scope: true,
@@ -20,8 +20,14 @@ angular.module('depthyApp')
       this.getViewer = function() {
         return viewer;
       };
-
     },
+    link: function ($scope, $element, $attrs) {
+      depthy.loadUrlDirectImage($attrs.depthyFileUrl, false, {
+        depthSource: $attrs.depthyDepthUrl,
+        stateParams: {
+          url: $attrs.depthyFileUrl
+        }
+      });
+    }
   };
-
 });

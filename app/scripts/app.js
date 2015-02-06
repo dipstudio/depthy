@@ -32,8 +32,10 @@ angular.module('depthyApp', [
     onEnter: ['depthy', '$state', function (depthy, $state) {
       if (!$state.current.name) {
         // first timer
-        depthy.leftpaneOpen();
-        depthy.loadSampleImage('flowers');
+        //depthy.leftpaneOpen();
+
+        //console.info('loadSampleImage');
+        //depthy.loadSampleImage('flowers');
       }
     }]
   })

@@ -9,6 +9,8 @@ angular.module('depthyApp')
   $rootScope.Math = window.Math;
   $rootScope.screenfull = screenfull;
 
+    //console.info(depthy.viewer);
+
   $scope.version = depthy.getVersion();
 
   ga('set', 'dimension1', (Modernizr.webgl ? 'webgl' : 'no-webgl') + ' ' + (Modernizr.webp ? 'webp' : 'no-webp'));
@@ -24,8 +26,11 @@ angular.module('depthyApp')
     }
   };
 
+    //depthy.loadSampleImage('flowers');
+
   $scope.loadSample = function(name) {
     $state.go('sample', {id: name});
+
     // depthy.leftpaneOpen(true);
   };
 
@@ -33,8 +38,6 @@ angular.module('depthyApp')
     $state.go(image.state, image.stateParams);
     // depthy.leftpaneOpen(true);
   };
-
-
 
   $scope.$watch('compoundFiles', function(files) {
     if (files && files.length) {
@@ -78,11 +81,11 @@ angular.module('depthyApp')
   $scope.exportAnimationOptions = function(type) {
     var oldAnimate = depthy.viewer.animate;
     depthy.viewer.animate = true;
-    
+
     if (type === 'gif') {
       depthy.exportSize = Math.min(500, depthy.exportSize);
     }
-    
+
     depthy.openPopup('export.' + type + '.options').promise.finally(function() {
       depthy.viewer.animate = oldAnimate;
     });
@@ -200,7 +203,7 @@ angular.module('depthyApp')
     $scope.$safeApply();
   });
 
-  $timeout(function() {
+  /*$timeout(function() {
     $scope.scroll = new IScroll('#leftpane', {
       mouseWheel: true,
       scrollbars: 'custom',
@@ -216,7 +219,7 @@ angular.module('depthyApp')
         $scope.scroll.refresh();
       }, 100);
     });
-  });
+  });*/
 
 
 

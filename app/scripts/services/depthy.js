@@ -40,7 +40,7 @@ angular.module('depthyApp').provider('depthy', function depthy() {
         parsed: undefined,
         // id of local sample
         sample: undefined,
-        // 
+        //
         title: false,
         // thumbnail url
         thumb: false,
@@ -651,7 +651,9 @@ angular.module('depthyApp').provider('depthy', function depthy() {
             opened.imageSource = URL.createObjectURL( new Blob([buffer], {type: 'image/jpeg'}) );
             opened.depthSource = reader.depth.data ? 'data:' + reader.depth.mime + ';base64,' + reader.depth.data : false;
             opened.originalSource = reader.image.data ? 'data:' + reader.image.mime + ';base64,' + reader.image.data : false;
+
             depthy.getViewer().setDepthmap(opened.depthSource);
+
             deferred.resolve(depthy.refreshOpenedImage());
           };
 
@@ -891,7 +893,7 @@ angular.module('depthyApp').provider('depthy', function depthy() {
         gallery = false;
         depthy.zenMode = false;
         if (this.isFullLayout()) return;
-        
+
         if (!gallery && depthy.leftpaneOpen !== true && !leftpaneDeferred) {
           if (depthy.activePopup) depthy.activePopup.reject();
 

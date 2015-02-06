@@ -58,7 +58,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
     var self = this,
         canvas, stage, renderer, stats,
         image = {}, depth = {},
-        sizeDirty = true, stageDirty = true, renderDirty = true, depthFilterDirty = true, 
+        sizeDirty = true, stageDirty = true, renderDirty = true, depthFilterDirty = true,
         discardAlphaFilter, resetAlphaFilter, invertedAlphaToRGBFilter, discardRGBFilter, invertedRGBToAlphaFilter, depthBlurFilter, grayscaleFilter,
         stageSize, stageSizeCPX,
         // renderUpscale = 1.05,
@@ -86,7 +86,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
       initHover();
       initOrient();
       initRenderer();
-      
+
       if (renderer) requestAnimFrame( renderLoop );
 
     }
@@ -384,7 +384,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
         if (options.fit === 'cover') {
           stageSize = sizeFit(stageSize, options.size, true);
           stageSize = sizeFit(stageSize, maxSize);
-          // 
+          //
           if (stageSize.height > options.size.height) stageSize.height = options.size.height;
           if (stageSize.width > options.size.width) stageSize.width = options.size.width;
         }
@@ -448,7 +448,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
         imageRender = null;
       }
       imageRender = imageRender || new PIXI.RenderTexture(stageSize.width, stageSize.height);
-      
+
       image.dirty = false;
       image.renderDirty = stageDirty = true;
     }
@@ -508,7 +508,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
       // combine image with depthmap
       var q = options.quality || quality.current;
       if (!depthFilter || depthFilter.quality !== q) {
-        depthFiltersCache[q] = depthFilter = depthFiltersCache[q] || 
+        depthFiltersCache[q] = depthFilter = depthFiltersCache[q] ||
             (q === 1 ? new PIXI.DepthDisplacementFilter(depthRender)
                     : new PIXI.DepthPerspectiveFilter(depthRender, q));
         depthFilter.quality = q;
@@ -555,7 +555,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
 
     function updateOffset() {
       if (depthOffset.x !== easedOffset.x || depthOffset.y !== easedOffset.y) {
-        
+
         if (options.easeFactor && !options.animate) {
           easedOffset.x = easedOffset.x * options.easeFactor + depthOffset.x * (1-options.easeFactor);
           easedOffset.y = easedOffset.y * options.easeFactor + depthOffset.y * (1-options.easeFactor);
@@ -625,7 +625,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
       } else if (quality.fps > 58) { // 50fps
         quality.fast++;
       }
-      
+
       // console.log('Quality ', quality);
 
       if (quality.slow > 5 || (quality.count > 15 && quality.avg < (quality.current > 4 ? 55 : 25))) {
@@ -635,7 +635,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
         changeQuality(quality.current - 1);
       } else if (/*quality.fast > 30 ||*/ quality.count > 40 && quality.avg > (quality.current > 3 ? 55 : 50)) {
         // quality 4 is fast above 55
-        // log this 
+        // log this
         changeQuality(quality.current + 1);
       } else if (quality.count > 60) {
         changeQuality(quality.current);
@@ -692,7 +692,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
       if (quality.dirty || !quality.measured) {
         updateQuality();
       }
-      
+
     }
 
     var lastLoopTime = 0;
@@ -799,6 +799,8 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
     };
 
     this.setDepthmap = function(source, useAlpha) {
+      console.info('setDepthmap', source);
+
       depth = changeTexture(depth, source);
       depth.useAlpha = !!useAlpha;
       return depth.promise;
@@ -850,7 +852,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
               localstage = new PIXI.Stage(),
               scale = size.width / image.size.width,
               depthScale = size.width / depth.size.width,
-              // we need unmultiplied canvas for this... 
+              // we need unmultiplied canvas for this...
               // it uploads images to the GPU once again, and won't work with local textures, but... well...
               localrenderer = new PIXI.WebGLRenderer(size.width, size.height, null, 'notMultiplied', true);
 
@@ -956,7 +958,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
       var container = new PIXI.DisplayObjectContainer();
       if (hasDepthmap()) {
         var scale = sizeFitScale(depth.size, size, true);
-        
+
         var sprite = new PIXI.Sprite(depth.texture);
         sprite.scale = new PIXI.Point(scale, scale);
         sprite.anchor = {x: 0.5, y: 0.5};

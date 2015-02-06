@@ -1,7 +1,7 @@
-<div id="main" ng-controller="MainCtrl" 
+<div id="main" ng-controller="MainCtrl"
   ng-class="{
-    'leftpane-opened': depthy.isLeftpaneOpened() === true, 
-    'leftpane-gallery': depthy.isLeftpaneOpened() === 'gallery', 
+    'leftpane-opened': depthy.isLeftpaneOpened() === true,
+    'leftpane-gallery': depthy.isLeftpaneOpened() === 'gallery',
     'zen-mode': depthy.zenMode,
     'draw-mode': depthy.drawMode,
     'offline': depthy.isOffline(),
@@ -35,7 +35,7 @@
       <section class="alert alert-warning alert-icon anim-expand" ng-if="depthy.isOffline()">
         <i class="icon icon-powercord"></i>
         You're working offline.<br/>Some feature may not be available!
-      </section>      
+      </section>
       <section class="alert alert-success alert-icon alert-button anim-expand" ng-if="depthy.gotUpdate">
         <i class="icon icon-loop"></i>
         <div class="btn btn-success btn-sm pull-right" ng-click="depthy.reload()">Reload</div>
@@ -95,9 +95,7 @@
 
     </div>
 
-    <div class="depthy-viewer" depthy-viewer="depthy.viewer" ng-click="depthy.zenModeToggle()" 
-      ng-swipe-right="depthy.leftpaneOpen()"
-    >
+    <div class="depthy-viewer" depthy-viewer="depthy.viewer" depthy-file-url="http://localhost:9000/samples/flowers-image.jpg" depthy-depth-url="http://localhost:9000/samples/flowers-depth.jpg" ng-click="depthy.zenModeToggle()" ng-swipe-right="depthy.leftpaneOpen()">
       <canvas></canvas>
       <div class="icon icon-loading"></div>
     </div>

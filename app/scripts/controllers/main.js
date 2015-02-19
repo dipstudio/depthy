@@ -1,15 +1,12 @@
 'use strict';
 
 angular.module('depthyApp')
-.controller('MainCtrl', function ($rootScope, $window, $scope, $timeout, depthy, $element, $modal, $state, StateModal) {
+.controller('MainCtrl', function ($rootScope, $window, $scope, $timeout, depthy, $element) {
 
   $rootScope.depthy = depthy;
   $rootScope.viewer = depthy.viewer; // shortcut
   $rootScope.Modernizr = window.Modernizr;
   $rootScope.Math = window.Math;
-  $rootScope.screenfull = screenfull;
-
-    //console.info(depthy.viewer);
 
   $scope.version = depthy.getVersion();
 
@@ -22,19 +19,6 @@ angular.module('depthyApp')
     } else {
       this.$apply(fn);
     }
-  };
-
-    //depthy.loadSampleImage('flowers');
-
-  $scope.loadSample = function(name) {
-    $state.go('sample', {id: name});
-
-    // depthy.leftpaneOpen(true);
-  };
-
-  $scope.openImage = function(image) {
-    $state.go(image.state, image.stateParams);
-    // depthy.leftpaneOpen(true);
   };
 
   $scope.$watch('compoundFiles', function(files) {
@@ -56,96 +40,6 @@ angular.module('depthyApp')
   $scope.$watch('depthy.useOriginalImage', function() {
     depthy.refreshOpenedImage();
   });
-
-
-  $scope.imageOptions = function() {
-    depthy.openPopup('image.options');
-  };
-
-  $scope.shareOptions = function() {
-    depthy.openPopup('share.options');
-  };
-
-  $scope.imageInfo = function() {
-    StateModal.showModal('image.info', {
-      templateUrl: 'views/image-info-modal.html',
-      windowClass: 'info-modal',
-      controller: 'ImageInfoModalCtrl',
-    });
-  };
-
-  $scope.exportAnimationOptions = function(type) {
-    var oldAnimate = depthy.viewer.animate;
-    depthy.viewer.animate = true;
-
-    if (type === 'gif') {
-      depthy.exportSize = Math.min(500, depthy.exportSize);
-    }
-
-    depthy.openPopup('export.' + type + '.options').promise.finally(function() {
-      depthy.viewer.animate = oldAnimate;
-    });
-
-  };
-
-  $scope.exportAnimationRun = function(type) {
-    depthy.exportActive = true;
-    StateModal.showModal('export.' + type + '.run', {
-      // stateOptions: {location: 'replace'},
-      templateUrl: 'views/export-' + type + '-modal.html',
-      controller: 'Export' + type.substr(0,1).toUpperCase() + type.substr(1) + 'ModalCtrl',
-      // backdrop: 'static',
-      windowClass: 'export-' + type + '-modal',
-    }).result.finally(function() {
-      depthy.exportActive = false;
-    });
-  };
-
-  $scope.exportPngRun = function() {
-    StateModal.showModal('export.png', {
-      // stateOptions: {location: 'replace'},
-      templateUrl: 'views/export-png-modal.html',
-      controller: 'ExportPngModalCtrl',
-      windowClass: 'export-png-modal',
-    }).result.finally(function() {
-    });
-  };
-
-  $scope.exportJpgRun = function() {
-    StateModal.showModal('export.jpg', {
-      // stateOptions: {location: 'replace'},
-      templateUrl: 'views/export-jpg-modal.html',
-      controller: 'ExportJpgModalCtrl',
-      windowClass: 'export-jpg-modal',
-    }).result.finally(function() {
-    });
-  };
-
-  $scope.exportAnaglyphRun = function() {
-    StateModal.showModal('export.anaglyph', {
-      // stateOptions: {location: 'replace'},
-      templateUrl: 'views/export-anaglyph-modal.html',
-      controller: 'ExportAnaglyphModalCtrl',
-      windowClass: 'export-anaglyph-modal modal-lg',
-    }).result.finally(function() {
-    });
-  };
-
-  $scope.sharePngRun = function() {
-    StateModal.showModal('share.png', {
-      // stateOptions: {location: 'replace'},
-      templateUrl: 'views/share-png-modal.html',
-      controller: 'SharePngModalCtrl',
-      // backdrop: 'static',
-      // keyboard: false,
-      windowClass: 'share-png-modal',
-    }).result.finally(function() {
-    });
-  };
-
-  $scope.drawDepthmap = function() {
-    $state.go('draw');
-  };
 
   $scope.debugClicksLeft = 2;
   $scope.debugClicked = function() {
@@ -183,7 +77,7 @@ angular.module('depthyApp')
     Modernizr.webgl = false;
   });
 
-  $($window).on('resize', function() {
+  /*$($window).on('resize', function() {
     var $viewer = $('#viewer');
     depthy.viewer.size = {
       width:  $viewer.width(),
@@ -192,7 +86,7 @@ angular.module('depthyApp')
     console.log('Resize %dx%d', $viewer.width(), $viewer.height());
     $scope.$safeApply();
   });
-  $($window).resize();
+  $($window).resize();*/
 
   $($window).on('online offline', function() {
     $scope.$safeApply();

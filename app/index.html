@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="depthyApp" manifest="manifest.appcache">
+<html class="no-js">
   <head>
     <meta charset="utf-8">
     <title>DEPTHY</title>
@@ -38,7 +38,22 @@
         </div>
     </div>
 
-    <div id="app" ng-include="'views/main.html'"></div>
+    <div id="app" ng-app="depthyApp">
+        <div id="main" ng-controller="MainCtrl"
+             ng-class="{
+    'zen-mode': depthy.zenMode,
+    'draw-mode': depthy.drawMode,
+    'offline': depthy.isOffline(),
+    'depthy-ready': depthy.isReady(),
+    'depthy-loading': depthy.isLoading()}"
+            >
+            <div id="viewer" style="width: 100%; height: 640px;" class="depthy-viewer" depthy-viewer="depthy.viewer" depthy-file-url="http://localhost:9000/samples/flowers-image.jpg" depthy-depth-url="http://localhost:9000/samples/flowers-depth.jpg">
+                <canvas></canvas>
+                <!--<div class="icon icon-loading"></div>-->
+            </div>
+        </div>
+
+    </div>
     <!--<span ui-view></span>-->
 
     <!-- build:js scripts/vendor.js -->
@@ -46,71 +61,26 @@
     <script src="scripts/modernizr-platform.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/pixi.js/bin/pixi.dev.js"></script>
-    <script src="bower_components/angular-ui-bootstrap/src/buttons/buttons.js"></script>
-    <script src="bower_components/angular-ui-bootstrap/src/modal/modal.js"></script>
-    <script src="bower_components/angular-ui-bootstrap/src/transition/transition.js"></script>
-    <script src="bower_components/angular-ui-bootstrap/src/dropdown/dropdown.js"></script>
     <script src="bower_components/angular-touch/angular-touch.min.js"></script>
     <script src="bower_components/is-jpg/browser.js"></script>
     <script src="bower_components/is-png/browser.js"></script>
     <script src="scripts/vendor/LensBlurDepthExtractor.js"></script>
     <script src="scripts/vendor/md5.js"></script>
     <script src="scripts/classes/GDepthEncoder.js"></script>
-    <script src="scripts/classes/dataURITools.js"></script>
     <script src="bower_components/promise/index.js"></script>
-    <script src="bower_components/screenfull/dist/screenfull.js"></script>
-    <script src="bower_components/iscroll/build/iscroll.js"></script>
 
     <!-- endbuild -->
-
-    <!--
-    <script src="bower_components/stats.js/build/stats.min.js"></script>
-
-    <script src="bower_components/angular-strap/dist/modules/dimensions.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/tooltip.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/tooltip.tpl.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/modal.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/modal.tpl.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/popover.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/popover.tpl.js"></script>
-    <script src="bower_components/angular-strap/dist/modules/button.js"></script>
-
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
-    -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/services/depthy.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/draw.js"></script>
-    <script src="scripts/directives/fileselect.js"></script>
-    <script src="scripts/directives/pixi.js"></script>
     <script src="scripts/directives/depthyViewer.js"></script>
-    <script src="scripts/directives/shareurls.js"></script>
-    <script src="scripts/directives/rangeStepper.js"></script>
     <script src="scripts/pixi/ColorMatrixFilter2.js"></script>
-    <script src="scripts/pixi/DepthDisplacementFilter.js"></script>
     <script src="scripts/pixi/DepthPerspectiveFilter.js"></script>
-    <script src="scripts/pixi/utils.js"></script>
-    <script src="scripts/templates.js"></script>
-    <script src="scripts/bs-templates.js"></script>
-    <script src="scripts/svg-templates.js"></script>
-    <script src="scripts/controllers/exportgifmodal.js"></script>
-    <script src="scripts/controllers/exportwebmmodal.js"></script>
-    <script src="scripts/controllers/imageinfomodal.js"></script>
-    <script src="scripts/controllers/sharepngmodal.js"></script>
-    <script src="scripts/controllers/exportpngmodal.js"></script>
-    <script src="scripts/controllers/exportjpgmodal.js"></script>
-    <script src="scripts/controllers/exportanaglyphmodal.js"></script>
     <script src="scripts/classes/DepthyViewer.js"></script>
-    <script src="scripts/classes/DepthyDrawer.js"></script>
-    <script src="scripts/services/statemodal.js"></script>
-    <script src="scripts/services/UpdateCheck.js"></script>
     <!-- endbuild -->
 
     <!--

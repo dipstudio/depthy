@@ -72,6 +72,8 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
 
         depthOffset = {x: 0, y: 0}, easedOffset = depthOffset;
 
+      console.info('options', options);
+
     options = extend({}, defaultOptions, options || {});
 
     // PRIVATE FUNCTIONS
@@ -94,6 +96,7 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
     function initHover() {
       var hoverElement = options.hoverElement || element;
       if (typeof(hoverElement) === 'string') hoverElement = element.ownerDocument.querySelector(hoverElement);
+
       if (!hoverElement) {
         console.warn('Hover element %s not found!', options.hoverElement);
         return;
@@ -109,10 +112,11 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
       var hoverElement = event.currentTarget,
           size = Math.min(stageSizeCPX.height, stageSizeCPX.width) * 0.9,
           pointerEvent = event.touches ? event.touches[0] : event,
-          x = (pointerEvent.pageX - hoverElement.offsetLeft) / hoverElement.offsetWidth,
-          y = (pointerEvent.pageY - hoverElement.offsetTop) / hoverElement.offsetHeight;
-      x = Math.max(-1, Math.min(1, (x * 2 - 1) * hoverElement.offsetWidth / size));
-      y = Math.max(-1, Math.min(1, (y * 2 - 1) *  hoverElement.offsetHeight / size));
+          x = (pointerEvent.pageX) / document.documentElement.offsetWidth,
+          y = (pointerEvent.pageY) / screen.height;
+
+      x = Math.max(-1, Math.min(1, (x * 2 - 1) * document.documentElement.offsetWidth / size));
+      y = Math.max(-1, Math.min(1, (y * 2 - 1) * screen.height / size));
 
       depthOffset = {x: -x, y: -y};
       renderDirty = true;
@@ -409,12 +413,10 @@ Copyright (c) 2014 Rafał Lindemann. http://panrafal.github.com/depthy
         stageSize.width -= stageSize.width % options.sizeDivisible;
         stageSize.height -= stageSize.height % options.sizeDivisible;
       }
-      // console.log('Stage %dx%d StageCPX %dx%d', stageSize.width, stageSize.height, stageSizeCPX.width, stageSizeCPX.height);
+      //console.log('Stage %dx%d StageCPX %dx%d', stageSize.width, stageSize.height, stageSizeCPX.width, stageSizeCPX.height);
 
       canvas.style.width = stageSizeCPX.width + 'px';
       canvas.style.height = stageSizeCPX.height + 'px';
-      canvas.style.marginLeft = Math.round(stageSizeCPX.width / -2) + 'px';
-      canvas.style.marginTop = Math.round(stageSizeCPX.height / -2) + 'px';
 
       if (renderer && (renderer.width !== stageSize.width || renderer.height !== stageSize.height)) {
         renderer.resize(stageSize.width, stageSize.height);

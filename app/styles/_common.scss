@@ -4,7 +4,7 @@ html {
   font-size: $font-size-base;
 }
 
-/* Space out content a bit */
+
 body {
   padding: 0px;
 
@@ -270,13 +270,13 @@ p a {
   margin: 0em 0.1em;
 
   &.icon-facebook {
-    color: $facebook-color; 
+    color: $facebook-color;
   }
   &.icon-googleplus {
-    color: $google-color; 
+    color: $google-color;
   }
   &.icon-twitter {
-    color: $twitter-color; 
+    color: $twitter-color;
   }
 
 }
@@ -335,9 +335,9 @@ p a {
     color: $brand-neutral;
     span {
       display: inline-block;
-      min-width: 80px;      
+      min-width: 80px;
     }
-  }  
+  }
   .rs-thumb {
     z-index: 2;
     cursor: ew-resize;
@@ -393,11 +393,11 @@ logo {
     height: 100%;
     z-index: -1;
     $unit: 20 / 22 + 0em;
-    box-shadow-: 
+    box-shadow-:
               // inset 0 0 0 $unit * 2 fade-out(#eee, 0.8),
               inset 0 0 0 $unit * 1.5 fade-out(#eee, 0.8),
               inset 0 0 0 $unit * 2 fade-out(#eee, 0.8);
-      
+
   }
 
 
@@ -455,7 +455,7 @@ logo {
     font-size: 1rem;
     background: $brand-neutral-dark;
     color: $text-color;
-    padding: $panel-heading-padding;    
+    padding: $panel-heading-padding;
   }
 
   &.empty, &.loading {
@@ -633,7 +633,7 @@ logo {
     padding: $padding-base-vertical;
     margin-top: -$padding-base-vertical;
     margin-bottom: $padding-base-vertical;
-  } 
+  }
 
   .popup-footer {
     margin-top: $padding-base-vertical;
@@ -658,7 +658,7 @@ logo {
 }
 
 
-// panels 
+// panels
 
 .panel {
   max-width: remify(400px);
@@ -782,7 +782,7 @@ logo {
       opacity: 1!important;
     }
 
-  } 
+  }
   .modal.fade.in .modal-dialog, .modal.fade.out .modal-dialog {
     transform: translateX(0%);
   }
@@ -795,7 +795,7 @@ logo {
     top: 59px;
     bottom: 53px;
   }
-  
+
   .modal-footer {
     // display: none;
     position: absolute;

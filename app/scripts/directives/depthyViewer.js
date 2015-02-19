@@ -22,12 +22,35 @@ angular.module('depthyApp')
       };
     },
     link: function ($scope, $element, $attrs) {
-      depthy.loadUrlDirectImage($attrs.depthyFileUrl, false, {
-        depthSource: $attrs.depthyDepthUrl,
-        stateParams: {
-          url: $attrs.depthyFileUrl
-        }
+      function loadImage (fileUrl, mapUrl) {
+        fileUrl && depthy.loadUrlDirectImage(fileUrl, false, {
+          depthSource: mapUrl,
+          stateParams: {
+            url: fileUrl
+          }
+        });
+      }
+
+      $attrs.$observe('depthyFileUrl', function(depthyFileUrl) {
+        loadImage(depthyFileUrl, $attrs.depthyDepthUrl);
       });
+
+      $attrs.$observe('depthyDepthUrl', function(depthyDepthUrl) {
+        loadImage($attrs.depthyFileUrl, depthyDepthUrl);
+      });
+
+      loadImage($attrs.depthyFileUrl, $attrs.depthyDepthUrl);
+
+      $(window).on('resize', function() {
+        depthy.viewer.size = {
+          width:  $($element).width(),
+          height: $($element).height()
+        };
+
+          $scope.$safeApply();
+      });
+
+      $(window).resize();
     }
   };
 });

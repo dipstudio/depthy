@@ -7,7 +7,7 @@ angular.module('depthyApp')
       viewer = depthy.getViewer(),
       lastPointerPos = null,
       oldViewerOpts = angular.extend({}, depthy.viewer);
-      
+
   drawer.setOptions(depthy.drawOptions || {
     depth: 0.5,
     size: 0.05,
@@ -54,12 +54,12 @@ angular.module('depthyApp')
   };
 
   $scope.done = function() {
-    $window.history.back();
+    depthy.drawModeDisable();
   };
 
   $scope.cancel = function() {
     drawer.cancel();
-    $window.history.back();
+    depthy.drawModeDisable();
   };
 
   $scope.brushIcon = function() {
@@ -80,7 +80,10 @@ angular.module('depthyApp')
 
     if (event.target.id !== 'draw') return;
 
-    lastPointerPos = viewer.screenToImagePos({x: pointerEvent.pageX, y: pointerEvent.pageY});
+    lastPointerPos = viewer.screenToImagePos({
+      x: pointerEvent.pageX - window.pageXOffset - document.documentElement.clientLeft,
+      y: pointerEvent.pageY - window.pageYOffset - document.documentElement.clientTop
+    });
 
     if ($scope.brushMode === 'picker' || $scope.brushMode === 'level') {
       $scope.drawOpts.depth = drawer.getDepthAtPos(lastPointerPos);
@@ -106,7 +109,10 @@ angular.module('depthyApp')
     if (lastPointerPos) {
       var event = e.originalEvent,
           pointerEvent = event.touches ? event.touches[0] : event,
-          pointerPos = viewer.screenToImagePos({x: pointerEvent.pageX, y: pointerEvent.pageY});
+          pointerPos = viewer.screenToImagePos({
+            x: pointerEvent.pageX - window.pageXOffset - document.documentElement.clientLeft,
+            y: pointerEvent.pageY - window.pageYOffset - document.documentElement.clientTop
+          });
 
       drawer.drawBrushTo(pointerPos);
 

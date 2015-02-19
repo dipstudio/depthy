@@ -19,7 +19,7 @@ $brand-neutral: #666;
 
 $contrast: 10%;
 
-$brand-primary-dark: darken($brand-primary, $contrast); //#0165BD; 
+$brand-primary-dark: darken($brand-primary, $contrast); //#0165BD;
 $brand-danger-dark: darken($brand-danger, $contrast);
 $brand-success-dark: darken($brand-success, $contrast);
 $brand-warning-dark: darken($brand-warning, $contrast);
@@ -54,7 +54,7 @@ $border-radius-base: 0px;
 $border-radius-large: 0px;
 $border-radius-small: 0px;
 
-// states 
+// states
 $state-danger-bg: $brand-danger;
 $state-danger-text: $text-color;
 $state-danger-border: $brand-danger-dark;

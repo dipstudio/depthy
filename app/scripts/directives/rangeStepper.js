@@ -65,6 +65,7 @@ angular.module('depthyApp')
           if ($element.find('.rs-thumb').length === 0) {
             $element.append($compile(options.thumbTemplate.replace(/<placeholder\s*\/>/i, options.labelTemplate))($scope));
           }
+
           $timeout(updateValues);
         }
 

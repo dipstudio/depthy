@@ -5,13 +5,14 @@ angular.module('depthyApp').provider('depthy', function depthy() {
   // global settings object, synchronized with the remote profile, only simple values!
   var viewer = angular.extend({}, DepthyViewer.defaultOptions, {
     hoverElement: 'body',
-    fit: Modernizr.mobile ? 'cover' : 'contain',
-    depthScale: Modernizr.mobile ? 2 : 1,
+    fit: 'cover'
+    /*fit: Modernizr.mobile ? 'cover' : 'contain',
+    depthScale: Modernizr.mobile ? 2 : 1*/
   });
 
-  this.$get = function($timeout, $rootScope, $document, $window, $q, $modal, $state, StateModal, UpdateCheck) {
+  this.$get = function($timeout, $rootScope, $document, $window, $q) {
 
-    var leftpaneDeferred, depthy,
+    var depthy,
       history = [];
 
     function isImageInfo(info) {
@@ -109,11 +110,11 @@ angular.module('depthyApp').provider('depthy', function depthy() {
         },
         getStateUrl: function() {
           if (!self.state) return false;
-          return $state.href(self.state, self.stateParams || {});
+          //return $state.href(self.state, self.stateParams || {});
         },
         openState: function() {
           if (!self.state) throw 'No state to go to';
-          $state.go(self.state, self.stateParams);
+          //$state.go(self.state, self.stateParams);
         },
         // returns shareUrl
         getShareUrl: function(followShares) {
@@ -220,7 +221,7 @@ angular.module('depthyApp').provider('depthy', function depthy() {
     function lookupImageHistory(info, createMode) {
       var image;
       if (isImageInfo(info)) return info;
-      if (info.state) {
+      /*if (info.state) {
         if (info.state === true) {
           info.state = $state.current.name;
           info.stateParams = $state.params;
@@ -228,7 +229,7 @@ angular.module('depthyApp').provider('depthy', function depthy() {
         }
         image = _.find(history, {state: info.state, stateParams: info.stateParams});
         // console.log('%cFound %o in history when looking for %o', 'font-weight:bold', image, info);
-      }
+      }*/
       if (image) {
         _[createMode === 'extend' ? 'extend' : 'defaults'](image, info);
       } else if (createMode) {
@@ -376,14 +377,6 @@ angular.module('depthyApp').provider('depthy', function depthy() {
       storeSettings();
     }
 
-    function checkUpdate() {
-      // force the update daily
-      UpdateCheck.check(depthy.storedDate && (new Date().getTime() - depthy.storedDate > 86400000)).then(function(found) {
-        if (found) depthy.gotUpdate = true;
-        storeSettings();
-      });
-    }
-
     function initialize() {
       $rootScope.$on('$stateChangeSuccess', function() {
         depthy.zenMode = false;
@@ -392,7 +385,6 @@ angular.module('depthyApp').provider('depthy', function depthy() {
       openImage(createImageInfo({empty: true}));
 
       restoreSettings();
-      checkUpdate();
       restoreImageHistory();
       updateImageGallery();
 
@@ -875,57 +867,6 @@ angular.module('depthyApp').provider('depthy', function depthy() {
         });
       },
 
-
-      isLeftpaneOpened: function() {
-        return this.leftpaneOpened || this.isFullLayout();
-      },
-
-      leftpaneToggle: function() {
-        if (depthy.leftpaneOpened) {
-          depthy.leftpaneClose();
-        } else {
-          depthy.leftpaneOpen();
-        }
-      },
-
-      leftpaneOpen: function(gallery) {
-        gallery = false;
-        depthy.zenMode = false;
-        if (this.isFullLayout()) return;
-
-        if (!gallery && depthy.leftpaneOpen !== true && !leftpaneDeferred) {
-          if (depthy.activePopup) depthy.activePopup.reject();
-
-          leftpaneDeferred = StateModal.stateDeferred(true);
-          leftpaneDeferred.promise.finally(function() {
-            if (depthy.leftpaneOpened === true) depthy.leftpaneOpened = false;
-            leftpaneDeferred = null;
-          });
-        }
-        depthy.leftpaneOpened = gallery ? 'gallery' : true;
-      },
-
-      leftpaneClose: function() {
-        if (this.isFullLayout()) return;
-        if (leftpaneDeferred) {
-          if (depthy.leftpaneOpened === true) {
-            leftpaneDeferred.reject();
-          }
-          leftpaneDeferred = null;
-        }
-        depthy.leftpaneOpened = false;
-      },
-
-      openPopup: function(state, options) {
-        depthy.leftpaneClose();
-        depthy.activePopup = StateModal.stateDeferred(true, options);
-        depthy.activePopup.state = state;
-        depthy.activePopup.promise.finally(function() {
-          if (depthy.activePopup.state === state) depthy.activePopup = null;
-        });
-        return depthy.activePopup;
-      },
-
       zenModeToggle: function() {
         if (depthy.leftpaneOpened !== 'gallery') depthy.leftpaneClose();
         if (!depthy.isReady() || !depthy.hasCompleteImage()) {
@@ -955,7 +896,6 @@ angular.module('depthyApp').provider('depthy', function depthy() {
         $timeout(function() {$($window).resize();});
       },
 
-
       reload: function() {
         $window.location.reload();
       },
@@ -970,7 +910,6 @@ angular.module('depthyApp').provider('depthy', function depthy() {
           }
         });
       },
-
 
     };
 

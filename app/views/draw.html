@@ -1,9 +1,9 @@
-<section id="draw" ng-controller="DrawCtrl" class="draw-mode-{{brushMode}}" ng-class="{'brush-opened': brushOpened}">
+<div id="draw" ng-controller="DrawCtrl" class="draw-mode-{{brushMode}}" ng-class="{'brush-opened': brushOpened}">
   <div class="draw-options">
 
     <div class="draw-instructions">
-      Here you can draw the depthmap with your 
-      {{Modernizr.mobile ? 'finger' : 'mouse'}}. Use the sliders to 
+      Here you can draw the depthmap with your
+      {{Modernizr.mobile ? 'finger' : 'mouse'}}. Use the sliders to
       setup the brush.<br/>
       Remember that <b>black</b> means <b>near</b> the screen, and white is far away.<br/>
       Use <b>opacity</b> to make subtle changes, and <b>level</b> to draw at the same level as the point you start.
@@ -96,7 +96,7 @@
     </div>
 
   </div>
-    
+
 
 <!--
     Preview
@@ -136,4 +136,4 @@
   </div>
 -->
 
-</section>
+</div>

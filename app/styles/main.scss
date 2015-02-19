@@ -107,8 +107,8 @@ $thumbnail-bg: $body-bg;
 $thumbnail-matte: $brand-neutral-dark;
 $thumbnail-padding: 1px;
 
-@import "_bootstrap.scss";
-@import "_icomoon.scss";
+//@import "_bootstrap.scss";
+//@import "_icomoon.scss";
 
 $navbar-height: 40px;
 $navbar-bg: $body-bg;
@@ -146,7 +146,7 @@ $media-full: "(min-width: #{$screen-lg-min})";
 
 @import "_mixins.scss";
 @import "_common.scss";
-@import "_animations.scss";
+//@import "_animations.scss";
 @import "_elements.scss";
-@import "_rwd.scss";
-@import "_poor.scss";
+//@import "_rwd.scss";
+//@import "_poor.scss";

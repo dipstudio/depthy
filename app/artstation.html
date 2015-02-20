@@ -424,12 +424,12 @@ img {
                     <div id="app" ng-app="depthyApp">
                         <div ng-controller="MainCtrl"
                              ng-class="{
-                'zen-mode': depthy.zenMode,
-                'draw-mode': depthy.drawMode,
-                'offline': depthy.isOffline(),
-                'depthy-ready': depthy.isReady(),
-                'depthy-loading': depthy.isLoading()
-             }">
+                                'zen-mode': depthy.zenMode,
+                                'draw-mode': depthy.drawMode,
+                                'offline': depthy.isOffline(),
+                                'depthy-ready': depthy.isReady(),
+                                'depthy-loading': depthy.isLoading()
+                             }">
                             <div id="viewer" class="depthy-viewer" depthy-viewer="depthy.viewer" depthy-file-url="http://localhost:9000/samples/150130_Freelance_RandyVargas-1024x520.jpg" depthy-depth-url="http://localhost:9000/samples/150130_Freelance_RandyVargas-1024x520-depthmap.jpg">
                                 <img src="http://localhost:9000/samples/150130_Freelance_RandyVargas-1024x520.jpg" alt=""/>
                                 <canvas></canvas>
@@ -437,32 +437,7 @@ img {
                             </div>
                         </div>
                     </div>
-                    <!-- build:js scripts/vendor.js -->
-                    <script src="scripts/modernizr.js"></script>
-                    <script src="scripts/modernizr-platform.js"></script>
-                    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-                    <script src="bower_components/angular/angular.js"></script>
-                    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-                    <script src="bower_components/pixi.js/bin/pixi.dev.js"></script>
-                    <script src="bower_components/angular-touch/angular-touch.min.js"></script>
-                    <script src="bower_components/is-jpg/browser.js"></script>
-                    <script src="bower_components/is-png/browser.js"></script>
-                    <script src="scripts/vendor/LensBlurDepthExtractor.js"></script>
-                    <script src="scripts/vendor/md5.js"></script>
-                    <script src="scripts/classes/GDepthEncoder.js"></script>
-                    <script src="bower_components/promise/index.js"></script>
-
-                    <!-- endbuild -->
-
-                    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-                    <script src="scripts/app.js"></script>
-                    <script src="scripts/services/depthy.js"></script>
-                    <script src="scripts/controllers/main.js"></script>
-                    <script src="scripts/directives/depthyViewer.js"></script>
-                    <script src="scripts/pixi/ColorMatrixFilter2.js"></script>
-                    <script src="scripts/pixi/DepthPerspectiveFilter.js"></script>
-                    <script src="scripts/classes/DepthyViewer.js"></script>
-                    <!-- endbuild -->
+                    <script src="scripts/maViewer.all.js"></script>
 
                 </div>
                 <script type="text/javascript">jQuery(document).ready(function($){

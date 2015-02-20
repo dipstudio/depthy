@@ -1,0 +1,179 @@
+	<!doctype html>
+<html>
+<head>
+    <base href="http://www.cgforward.com/cgs/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+<title>CG Society</title>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:200,400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="style/main.css">
+<link rel="stylesheet" type="text/css" href="style/editorial.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/sizeimage.js"></script>
+<script src="js/featurestory1.js"></script>
+</head>
+
+<body>
+	<div class="cgs-home">
+    	<div class='story-background'>
+            <style>
+                #viewer {
+                    position: relative;
+                    z-index: 0;
+                }
+
+                #viewer img {
+                    visibility: hidden;
+                    width: 100%!important;
+                    display: block!important;
+                    position: static!important;
+                    height: auto!important;
+                }
+
+                #viewer canvas {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 10;
+                    pointer-events: none;
+                }
+            </style>
+            <div id="app" ng-app="depthyApp">
+                <div id="main" ng-controller="MainCtrl"
+                     ng-class="{
+                'zen-mode': depthy.zenMode,
+                'draw-mode': depthy.drawMode,
+                'offline': depthy.isOffline(),
+                'depthy-ready': depthy.isReady(),
+                'depthy-loading': depthy.isLoading()
+             }">
+                    <div id="viewer" class="depthy-viewer" depthy-viewer="depthy.viewer" depthy-file-url="http://localhost:9000/samples/aaron-simms-01.jpg" depthy-depth-url="http://localhost:9000/samples/aaron-simms-01-depthmap.jpg">
+                        <img src='http://localhost:9000/samples/aaron-simms-01.jpg' />
+                        <canvas></canvas>
+                        <!--<div class="icon icon-loading"></div>-->
+                    </div>
+                </div>
+            </div>
+            <script src="http://localhost:9000/scripts/maViewer.all.js"></script>
+
+        </div>
+    	<div class='story-wrapper'>
+        	
+            <div class='content-wrapper'>
+            	<h2>Jupiter Ascending</h2>
+                <h3>Concept art of Aaron Sims</h3>
+                <h4>February 7th, 2015, by John Doe | <a href='#'>Feature Film</a></h4>
+                
+                <p>Mauris eleifend congue eros. Ut vitae suscipit velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam egestas neque nec arcu eleifend, non tincidunt magna ornare. Ut at tincidunt mi, ut bibendum nisl. Praesent sit amet ultricies nulla. Nunc accumsan eros at libero maximus, at vestibulum arcu luctus.</p>
+                <p><iframe width="420" height="260" src="https://www.youtube.com/embed/t4ZzMkDLjWI" frameborder="0" allowfullscreen></iframe></p>
+
+<p>Mauris ut arcu sodales, aliquam mauris at, scelerisque velit. Donec at accumsan orci, ut iaculis ipsum. Nam eget sem nisi. Mauris dictum nulla varius urna porttitor ultricies. Ut porttitor nibh sit amet mi placerat, nec mollis ipsum scelerisque. Proin nec porta dolor, et egestas leo. Nunc lobortis nec magna sed consectetur.</p>
+<p><img src="temp-content/aaron-01.jpg" /></p>
+
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque et ornare nisi. Nullam a aliquet odio, a ultrices augue. Donec at egestas arcu. Aliquam hendrerit sapien sit amet libero auctor egestas. Etiam hendrerit laoreet magna, ut tincidunt magna consequat quis. Proin aliquet mi non erat tempus, sit amet finibus felis tincidunt. Duis non malesuada magna, vel varius elit.</p>
+<p>Mauris eleifend congue eros. Ut vitae suscipit velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam egestas neque nec arcu eleifend, non tincidunt magna ornare. Ut at tincidunt mi, ut bibendum nisl. Praesent sit amet ultricies nulla. Nunc accumsan eros at libero maximus, at vestibulum arcu luctus.</p>
+<p><img src="temp-content/aaron-03.jpg" /></p>
+<p>Mauris ut arcu sodales, aliquam mauris at, scelerisque velit. Donec at accumsan orci, ut iaculis ipsum. Nam eget sem nisi. Mauris dictum nulla varius urna porttitor ultricies. Ut porttitor nibh sit amet mi placerat, nec mollis ipsum scelerisque. Proin nec porta dolor, et egestas leo. Nunc lobortis nec magna sed consectetur.</p>
+<p><img src="temp-content/aaron-02.jpg" /></p>
+
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque et ornare nisi. Nullam a aliquet odio, a ultrices augue. Donec at egestas arcu. Aliquam hendrerit sapien sit amet libero auctor egestas. Etiam hendrerit laoreet magna, ut tincidunt magna consequat quis. Proin aliquet mi non erat tempus, sit amet finibus felis tincidunt. Duis non malesuada magna, vel varius elit.</p>
+            </div>
+        </div>
+        <div class='editorial-footer'>
+        </div>
+        <div id="footer">
+	<div class='cgs-footer-wrapper'>
+    	<div class='twocolumn unit'>
+        	<h4>The CGSociety</h4>
+            <p>The CGSociety is the most respected and accessible global organization for creative digital artists. The CGS supports artists at every level by offering a range of services to connect, inform, educate and promote digital artists worldwide.</p>
+            <a href='about.php' class='button'>More about us</a>
+        </div>
+        <div class='column unit'>
+        	<h4>Learn</h4>
+            <p><a href='#'>CGWorkshops</a></p>
+            <p><a href='#'>CGTODs</a></p>
+            <p><a href='#'>Forums</a></p>
+            <p><a href='#'>CGWiki</a></p>
+        </div>
+        <div class='column unit'>
+        	<h4>Inspire</h4>
+            <p><a href='#'>Galleries</a></p>
+            <p><a href='#'>CGPortfolio</a></p>
+            <p><a href='#'>CGChallenge</a></p>
+            <p><a href='#'>Forum</a></p>
+            <p><a href='#'>Call for entries (BSW)</a></p>
+        </div>
+        <div class='column unit'>
+        	<h4>Inform</h4>
+            <p><a href='#'>CGFeatures</a></p>
+            <p><a href='#'>News</a></p>
+        </div>
+        <div class='column unit'>
+        	<h4>About CGS</h4>
+            <p><a href='about.php'>About</a></p>
+            <p><a href='#'>Contact</a></p>
+            <p><a href='#'>Privacy</a></p>
+            <p><a href='#'>Advertising</a></p>
+        </div>
+        <div class='clear'></div>
+    </div>
+    <div class='cgs-footer-wrapper'>
+    	<div class='twocolumn unit'>
+        	&nbsp;
+        </div>
+        <div class='twocolumn unit'>
+        	<a href='#' class='social facebook' title="Facebook"></a><a href='#' class='social twitter' title="Twitter"></a><a href='#' class='social pinterest' title="Pinterest"></a><a href='#' class='social linkedin' title="Linked In"></a><a href='#' class='social googleplus' title="Google Plus"></a>
+        </div>
+        <div class='clear'></div>
+        <div class='copyright'>
+            <p class='logo'>CGSOCIETY</p><p>© 2002-2015 | The CGSociety - All rights reserved. No part of this website may be reproduced unless for personal use without prior written permission from The CGSociety.</p>
+        </div>
+    </div>
+    
+</div>        <div class='banner-footer'><img class='leaderboard' src='temp-content/leaderboard-ad-placeholder.jpg' /><img class='bigbanner' src='temp-content/BIG-leaderboard-ad-placeholder.jpg' />
+        </div>
+    </div>
+    <div id="masthead">
+    	<a href='index2.php' id='logo'></a>
+        <div class='menu'>
+        	<ul>
+            	<li><a href="news.php">News/Features</a></li><li><a href="galleries.php">Galleries</a></li><li><a href="#">Portfolios</a></li><li><a href="#">Challenge</a></li><li><a href="#">Workshops</a></li>
+                <li><a href="#">Forums</a></li><li><a href="#" >Jobs</a></li><li class='mobile login'><a href="#" onclick="$('.drop-panel.drop-login').slideToggle(250); $('.menu.active').removeClass('active'); return false;">Log in</a></li><li class='mobile register'><a href="#"  onclick="loadRegistration(); $('.menu.active').removeClass('active'); return false;">Register</a></li>
+            </ul>
+            <a href='#' class='mobilemenubutton' onclick="$(this).parent().toggleClass('active'); return false;"></a>
+        </div>
+        <div class='searchbar'>
+       		<input type="text" placeholder="Search..." id="search" />
+            <a href='#' class='toggle' onclick="$(this).parent().toggleClass('active'); return false;"></a>
+        </div>
+        <a href='#' class='register' onclick="loadRegistration(); return false;">Register</a>
+        <a href='#' class='login-button'>Login</a>
+        <div class='drop-panel drop-login'>
+        	<h2>Login</h2>
+            <h4>Login using your username, email or Facebook. You don't have an account yet? No worries, <a href='#' onclick="loadRegistration(); return false;">joining</a> is easy.</h4>
+            <form class='login-form'>
+            	<div class='formfield'>
+                	<label>Username / Email</label>
+                    <input id="username" name="username" type="text" value="" placeholder="Username / Email"/>
+                </div>
+                <div class='formfield'>
+                	<label>Password</label>
+                    <input id="password" name="password" type="password" value="" placeholder="Password"/>
+                </div>
+                <div class='formfield'>
+                	<button class='mediumbutton'>Login</button>
+                </div>
+                <div class='formfield'>
+                <a href='#' class='register-facebook'>Login with facebook</a>
+                </div>
+                <div class='formfield'>
+                	<a href='#' onclick="loadRegistration(); return false;">Register</a> | <a href='#' onclick="loadResetPassword(); return false;">Reset password</a>
+                </div>
+            </form>
+            <a href='#' class='closemodal' onclick='$(".drop-login").slideUp(250); return false;'></a>
+        </div>
+        
+    </div></body>
+</html>
